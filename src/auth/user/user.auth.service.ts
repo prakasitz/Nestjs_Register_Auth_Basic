@@ -3,6 +3,7 @@ import { JwtService } from "@nestjs/jwt";
 import { ReturnModelType } from "@typegoose/typegoose";
 import { InjectModel } from "nestjs-typegoose";
 import { Register } from "src/model/register.model";
+import { jwtBody } from "../jwt.interface";
 
 @Injectable()
 export class UserAuthService {
@@ -19,11 +20,11 @@ export class UserAuthService {
             const jwtBody: jwtBody = {
                 aud: 'register',
                 sub: `${userOrNull.username}`,
-                commonid: userOrNull["_id"],
+                commonid: userOrNull._id,
                 commonname: userOrNull.firstName,
                 displayname: `${userOrNull.firstName} ${userOrNull.lastName}`,
             }
-            
+
             const tokenString: string = await this.jwtService.signAsync({ ...jwtBody }, { secret: process.env.JWT_USER_SECRET , expiresIn: 6000 });
             return { access_token: tokenString };
         }

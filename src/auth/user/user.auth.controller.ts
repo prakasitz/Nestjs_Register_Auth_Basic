@@ -1,43 +1,44 @@
 import { Body, Controller, Post, HttpException, HttpStatus, UseGuards, Req, Get } from "@nestjs/common";
 import { UserAuthGuard } from "../auth.guard";
 import { UserAuthService } from "./user.auth.service";
-import { InjectModel } from "nestjs-typegoose";
-import { Register } from "src/model/register.model";
-import { ReturnModelType } from "@typegoose/typegoose";
-
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import {jwtPayload, jwtBody} from '../jwt.interface';
+import { LogInDto } from "src/dto/login.dto";
+import { ResponseAuthLogin, ResponseJWTBody } from "src/dto/response.dto";
 @Controller('user/auth')
 export class UserAuthController {
     constructor(
         private readonly userAuthService: UserAuthService,
-        @InjectModel(Register) 
-        private readonly registerModel: ReturnModelType<typeof Register>,
       ) {
     }
 
     @Post('/login')
-    async checkUserLogin(@Body() body: any) {
-        try {
-            const {username, password} = body;
-            const JWTtoken = await this.userAuthService.checkUserLogin(username, password);
-            if (!JWTtoken) {
-                throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
-            }
-           return JWTtoken;
+    @ApiTags('Auth')
+    @ApiOperation({ summary: 'Login and retrieve an access token' })
+    @ApiResponse({ status: 200, description: 'Returns an access token', type: ResponseAuthLogin })
+    async checkUserLogin(@Body() body: LogInDto): Promise<{ access_token: string }> {
+      try {
+        const { username, password } = body;
+        const JWTtoken = await this.userAuthService.checkUserLogin(username, password);
+        if (!JWTtoken) {
+          throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
         }
-        catch (error) {
-            throw error;
-        }
+        return JWTtoken;
+      } catch (error) {
+        throw error;
+      }
     }
-
+  
     @Get('/userInfo')
+    @ApiTags('Auth')
+    @ApiOperation({ summary: 'Get user information' })
+    @ApiResponse({ status: 200, description: 'Returns user information', type: ResponseJWTBody})
+    @ApiBearerAuth()
     @UseGuards(UserAuthGuard)
-    async getUserLogin(@Req() req) {
-        if (!req.user) {
-            throw new HttpException({
-                status: HttpStatus.UNAUTHORIZED,
-                message: `401 UNAUTHORIZED`
-            }, HttpStatus.UNAUTHORIZED);
-        }
-        return req.user;
+    async getUserLogin(@Req() req): Promise<jwtBody> {
+      if (!req.user) {
+        throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
+      }
+      return req.user;
     }
 }
