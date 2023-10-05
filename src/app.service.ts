@@ -27,6 +27,10 @@ export class AppService {
     }
   }
 
+  login(username: string, password: string): Promise<any> {
+    return this.registerModel.login(username, password, this.registerModel)
+  }
+
   getRegister(): Promise<Register[]> {
     return this.registerModel.find().exec();
   }

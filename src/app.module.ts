@@ -8,6 +8,8 @@ import { ConfigModule } from '@nestjs/config';
 import { TypegooseModule } from 'nestjs-typegoose';
 import { MasterCountry } from './model/master-country.model';
 import { Register } from './model/register.model';
+import { AuthModule } from './auth/auth.module';
+import { UserAuthModules } from './auth/user/user.auth.module';
 
 @Module({
   imports: [
@@ -18,7 +20,9 @@ import { Register } from './model/register.model';
         }),
         TypegooseModule.forFeature([
           MasterCountry, Register
-        ], 'RegisterDemoMongoose')
+        ], 'RegisterDemoMongoose'),
+        AuthModule,
+        UserAuthModules
   ],
   controllers: [AppController],
   providers: [AppService],
