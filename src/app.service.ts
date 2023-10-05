@@ -3,7 +3,7 @@ import { MasterCountry } from './model/master-country.model';
 import { InjectModel } from 'nestjs-typegoose';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { Register } from './model/register.model';
-
+import * as bcrypt from 'bcryptjs'; // Import bcryptjs
 @Injectable()
 export class AppService {
   constructor (
@@ -23,6 +23,8 @@ export class AppService {
       if(countryObjOrNull === null) 
         throw new HttpException('Country code not found', HttpStatus.NOT_FOUND);
 
+      registerDto.password = await bcrypt.hash(registerDto.password, 10);
+
       const newUser = new this.registerModel(registerDto);
       await newUser.save();
 
@@ -34,10 +36,6 @@ export class AppService {
       console.error('Error creating user:', error);
       throw error;
     }
-  }
-
-  login(username: string, password: string): Promise<any> {
-    return this.registerModel.login(username, password, this.registerModel)
   }
 
   getRegister(): Promise<Register[]> {

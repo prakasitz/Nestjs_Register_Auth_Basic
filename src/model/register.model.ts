@@ -1,9 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { prop, ModelOptions, ReturnModelType } from '@typegoose/typegoose';
-import { Exclude } from 'class-transformer';
 import { IsNotEmpty, IsString } from 'class-validator';
-import mongoose from 'mongoose';
-
+import * as bcrypt from 'bcryptjs';
 @ModelOptions({ schemaOptions: { collection: 'register' } })
 export class Register {
 
@@ -45,7 +43,13 @@ export class Register {
 
   static async login(username: string, password: string, registerModel: ReturnModelType<typeof Register>): Promise<Register | null> {
     try {
-      const userOrNull = await registerModel.findOne({ username, password }).exec();
+      const userOrNull = await registerModel.findOne({ username }).exec();
+
+      if (!userOrNull) return null;
+      
+      const isPasswordValid = await bcrypt.compare(password, userOrNull.password);
+      if(!isPasswordValid) return null;
+
       return userOrNull;
     } catch (error) {
       throw new Error('Error checking username and password');

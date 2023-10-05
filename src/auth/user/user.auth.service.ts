@@ -16,6 +16,7 @@ export class UserAuthService {
 
     async checkUserLogin(username: string, password: string): Promise<any> {
         const userOrNull = await this.registerModel.login(username, password, this.registerModel);
+
         if (userOrNull) {
             const jwtBody: jwtBody = {
                 aud: 'register',

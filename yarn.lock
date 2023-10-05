@@ -1338,6 +1338,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/bcryptjs@npm:^2":
+  version: 2.4.4
+  resolution: "@types/bcryptjs@npm:2.4.4"
+  checksum: a4655a87cce32962bed5757f9585c63c18123ea0f7b28e3eb4df0b2212b214fc1d9ac8729586bf0467451ea43f797c4a51b017fc677515a13d3f08f9dad13c63
+  languageName: node
+  linkType: hard
+
 "@types/body-parser@npm:*":
   version: 1.19.3
   resolution: "@types/body-parser@npm:1.19.3"
@@ -2281,6 +2288,13 @@ __metadata:
   version: 1.5.1
   resolution: "base64-js@npm:1.5.1"
   checksum: 669632eb3745404c2f822a18fc3a0122d2f9a7a13f7fb8b5823ee19d1d2ff9ee5b52c53367176ea4ad093c332fd5ab4bd0ebae5a8e27917a4105a4cfc86b1005
+  languageName: node
+  linkType: hard
+
+"bcryptjs@npm:^2.4.3":
+  version: 2.4.3
+  resolution: "bcryptjs@npm:2.4.3"
+  checksum: f6798e57eacfe86960d31af9b8fbc15dc73281c42cfb2a294e2d737e0e9bb7e402dbd39ac68b114867b234fd841ae689dbac031cc6af822b9e72099f52157a8c
   languageName: node
   linkType: hard
 
@@ -6518,6 +6532,7 @@ __metadata:
     "@nestjs/swagger": "npm:^7.1.13"
     "@nestjs/testing": "npm:^10.0.0"
     "@typegoose/typegoose": "npm:^11.5.0"
+    "@types/bcryptjs": "npm:^2"
     "@types/express": "npm:^4.17.17"
     "@types/jest": "npm:^29.5.2"
     "@types/node": "npm:^20.3.1"
@@ -6525,6 +6540,7 @@ __metadata:
     "@types/supertest": "npm:^2.0.12"
     "@typescript-eslint/eslint-plugin": "npm:^6.0.0"
     "@typescript-eslint/parser": "npm:^6.0.0"
+    bcryptjs: "npm:^2.4.3"
     class-transformer: "npm:^0.5.1"
     class-validator: "npm:^0.14.0"
     eslint: "npm:^8.42.0"
