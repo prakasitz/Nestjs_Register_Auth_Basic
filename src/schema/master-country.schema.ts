@@ -1,18 +1,18 @@
-import mongoose from "mongoose";
+// master-country.schema.ts
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-export const MasterCountrySchema = new mongoose.Schema({
-    country_code: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    country_name: {
-      type: String,
-      required: true,
-    },
-});
+@Schema({
+    collection: 'master-country',
+    timestamps: true,
+})
+export class MasterCountry extends Document {
+  @Prop({ required: true, unique: true })
+  country_code: string;
 
-export interface MasterCountry extends mongoose.Document {
-    country_code: string;
-    country_name: string;
-  }
+  @Prop({ required: true })
+  country_name: string;
+}
+
+export const MasterCountrySchema = SchemaFactory.createForClass(MasterCountry);
+
