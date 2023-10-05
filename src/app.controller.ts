@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Get, Post, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AppService } from './app.service';
+import { Register } from './model/register.model';
 
 @Controller()
 export class AppController {
@@ -8,12 +9,17 @@ export class AppController {
   ) {}
 
   @Post('/register')
-  async register() {
-   return this.appService.getMasterCountry();
+  async register(@Body() registerData: Register) { 
+   return this.appService.register(registerData);
+  }
+
+  @Get('/register')
+  async findRegisterAll(): Promise<Register[]> {
+   return this.appService.getRegister();
   }
 
   @Get('/country')
-  async findAll() {
+  async findCountryAll() {
    return this.appService.getMasterCountry();
   }
 
