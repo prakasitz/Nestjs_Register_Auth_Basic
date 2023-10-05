@@ -4203,6 +4203,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-class@npm:^0.0.9":
+  version: 0.0.9
+  resolution: "is-class@npm:0.0.9"
+  checksum: ae5bf815182d64b766f3d7fa17171cbe7191365e789f4bd1a27f805ac585f6a460d01680d18866488f3c7ffb8afe5a991fbf2971a970f204d8bd8c9de50fb383
+  languageName: node
+  linkType: hard
+
 "is-core-module@npm:^2.13.0":
   version: 2.13.0
   resolution: "is-core-module@npm:2.13.0"
@@ -5587,6 +5594,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nestjs-typegoose@npm:^7.1.38":
+  version: 7.1.38
+  resolution: "nestjs-typegoose@npm:7.1.38"
+  dependencies:
+    is-class: "npm:^0.0.9"
+    reflect-metadata: "npm:^0.1.13"
+  peerDependencies:
+    "@nestjs/common": ^6.10.1 || ^7.0.0
+    "@nestjs/core": ^6.10.1 || ^7.0.0
+    "@typegoose/typegoose": ^6.2.1 || ^7.0.0
+    mongoose: ^5.10.6
+  checksum: 77fa16d54ce45c942367f92da2761793297a488e955b903d29d7a6b01b45e970db857126aa9769d060b2e7e6c4acf8025403106738fb2171a586bec3e8b75596
+  languageName: node
+  linkType: hard
+
 "node-abort-controller@npm:^3.0.1":
   version: 3.1.1
   resolution: "node-abort-controller@npm:3.1.1"
@@ -6237,6 +6259,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^5.0.0"
     jest: "npm:^29.5.0"
     mongoose: "npm:^7.5.4"
+    nestjs-typegoose: "npm:^7.1.38"
     prettier: "npm:^3.0.0"
     reflect-metadata: "npm:^0.1.13"
     rxjs: "npm:^7.8.1"

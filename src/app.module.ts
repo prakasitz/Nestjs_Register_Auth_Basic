@@ -1,22 +1,23 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { RegsiterDemoMongooseConnection } from './connection/register-demo.mongoose';
 import { ConfigModule } from '@nestjs/config';
-import { MasterCountry, MasterCountrySchema } from './schema/master-country.schema';
+import { TypegooseModule } from 'nestjs-typegoose';
+import { MasterCountry } from './model/master-country.model';
+import { Register } from './model/register.model';
 
 @Module({
   imports: [
         ConfigModule.forRoot(),
-        MongooseModule.forRootAsync({
-            useClass: RegsiterDemoMongooseConnection,
-            connectionName: "RegisterDemoMongoose",
+        TypegooseModule.forRootAsync({
+          useClass: RegsiterDemoMongooseConnection,
+          connectionName: "RegisterDemoMongoose",
         }),
-        MongooseModule.forFeature([
-            { name: MasterCountry.name, schema: MasterCountrySchema }
+        TypegooseModule.forFeature([
+          MasterCountry, Register
         ], 'RegisterDemoMongoose')
   ],
   controllers: [AppController],
