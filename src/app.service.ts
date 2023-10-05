@@ -15,8 +15,17 @@ export class AppService {
 
   async register(registerDto: Register): Promise<Register> {
     try {
+      const { countryCode } = registerDto;
+      const countryObjOrNull = await this.masterCountryModel.findOne({
+        country_code: countryCode
+      }).exec();
+
+      if(countryObjOrNull === null) 
+        throw new HttpException('Country code not found', HttpStatus.NOT_FOUND);
+
       const newUser = new this.registerModel(registerDto);
       await newUser.save();
+
       return newUser;
     } catch (error) {
       if (error.code === 11000 && error.keyPattern.username === 1) {
