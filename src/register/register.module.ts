@@ -5,7 +5,6 @@ import { TypegooseModule } from 'nestjs-typegoose';
 import { MasterCountry } from 'src/model/master-country.model';
 import { Register } from 'src/model/register.model';
 import { UserAuthModules } from 'src/auth/user/user.auth.module';
-import { CountryModule } from 'src/master/country/country.module';
 
 @Module({
   imports: [

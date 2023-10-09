@@ -1,10 +1,6 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get} from '@nestjs/common';
 import { AppService } from './app.service';
-import { Register } from './model/register.model';
-import { UserAuthGuard } from './auth/auth.guard';
-import { MasterCountry } from './model/master-country.model';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-
+import { ApiTags } from '@nestjs/swagger';
 @Controller()
 export class AppController {
   constructor (
