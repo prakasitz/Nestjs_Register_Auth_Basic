@@ -10,6 +10,8 @@ import { MasterCountry } from './model/master-country.model';
 import { Register } from './model/register.model';
 import { AuthModule } from './auth/auth.module';
 import { UserAuthModules } from './auth/user/user.auth.module';
+import { RegisterModule } from './register/register.module';
+import { CountryModule } from './master/country/country.module';
 
 @Module({
   imports: [
@@ -22,7 +24,9 @@ import { UserAuthModules } from './auth/user/user.auth.module';
           MasterCountry, Register
         ], 'RegisterDemoMongoose'),
         AuthModule,
-        UserAuthModules
+        UserAuthModules,
+        RegisterModule,
+        CountryModule
   ],
   controllers: [AppController],
   providers: [AppService],
