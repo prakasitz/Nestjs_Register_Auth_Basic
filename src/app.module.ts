@@ -20,13 +20,6 @@ import { CountryModule } from './master/country/country.module';
           useClass: RegsiterDemoMongooseConnection,
           connectionName: "RegisterDemoMongoose",
         }),
-        TypegooseModule.forFeature([
-          MasterCountry, Register
-        ], 'RegisterDemoMongoose'),
-        AuthModule,
-        UserAuthModules,
-        RegisterModule,
-        CountryModule
   ],
   controllers: [AppController],
   providers: [AppService],
