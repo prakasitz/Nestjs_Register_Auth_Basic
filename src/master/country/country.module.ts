@@ -15,6 +15,6 @@ import { TypegooseModule } from 'nestjs-typegoose';
       UserAuthModules,
   ],
   providers: [CountryService],
-  controllers: [CountryController]
+  controllers: [CountryController],
 })
 export class CountryModule {}

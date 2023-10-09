@@ -7,44 +7,7 @@ import * as bcrypt from 'bcryptjs'; // Import bcryptjs
 @Injectable()
 export class AppService {
   constructor (
-    @InjectModel(MasterCountry) 
-    private readonly masterCountryModel:  ReturnModelType<typeof MasterCountry>,
-    @InjectModel(Register) 
-    private readonly registerModel: ReturnModelType<typeof Register>,
   ) {}
-
-  async register(registerDto: Register): Promise<Register> {
-    try {
-      const { countryCode } = registerDto;
-      const countryObjOrNull = await this.masterCountryModel.findOne({
-        country_code: countryCode
-      }).exec();
-
-      if(countryObjOrNull === null) 
-        throw new HttpException('Country code not found', HttpStatus.NOT_FOUND);
-
-      registerDto.password = await bcrypt.hash(registerDto.password, 10);
-
-      const newUser = new this.registerModel(registerDto);
-      await newUser.save();
-
-      return newUser;
-    } catch (error) {
-      if (error.code === 11000 && error.keyPattern.username === 1) {
-        throw new HttpException('Username already exists', HttpStatus.CONFLICT);
-      }
-      console.error('Error creating user:', error);
-      throw error;
-    }
-  }
-
-  getRegister(): Promise<Register[]> {
-    return this.registerModel.find().exec();
-  }
-
-  getMasterCountry(): Promise<MasterCountry[]> {
-    return this.masterCountryModel.find().exec();
-  }
 
   getHello(): string {
     return 'Hello World!';

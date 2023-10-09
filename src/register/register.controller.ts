@@ -2,16 +2,21 @@ import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserAuthGuard } from 'src/auth/auth.guard';
 import { Register } from 'src/model/register.model';
+import { RegisterService } from './register.service';
 
 @ApiTags('Register')
 @Controller('register')
 export class RegisterController {
 
+    constructor (
+      private readonly registerService: RegisterService,
+    ) {}
+
     @Post('/')
     @ApiOperation({ summary: 'Register a new user' })
     @ApiResponse({ status: 201, description: 'User registered successfully', type: Register })
     async register(@Body() registerData: Register) {
-      return this.appService.register(registerData);
+      return this.registerService.register(registerData);
     }
   
     @Get('/')
@@ -20,7 +25,7 @@ export class RegisterController {
     @ApiBearerAuth()
     @UseGuards(UserAuthGuard)
     async findRegisterAll(): Promise<Register[]> {
-      return this.appService.getRegister();
+      return this.registerService.getRegister();
     }
   
 }

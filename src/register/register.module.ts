@@ -4,7 +4,6 @@ import { RegisterController } from './register.controller';
 import { TypegooseModule } from 'nestjs-typegoose';
 import { MasterCountry } from 'src/model/master-country.model';
 import { Register } from 'src/model/register.model';
-import { AuthModule } from 'src/auth/auth.module';
 import { UserAuthModules } from 'src/auth/user/user.auth.module';
 import { CountryModule } from 'src/master/country/country.module';
 
@@ -14,7 +13,6 @@ import { CountryModule } from 'src/master/country/country.module';
       MasterCountry, Register
     ], 'RegisterDemoMongoose'),
     UserAuthModules,
-    CountryModule
   ],
   providers: [RegisterService],
   controllers: [RegisterController]
