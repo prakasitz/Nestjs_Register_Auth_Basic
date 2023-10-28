@@ -1,6 +1,9 @@
-## Overview:
-Api + Swagger, using register user with validate country, hash password. Then registed, when user sign up, we genarate jwt and using jwt in guard for authorize,  
+## Project Overview:
+This project features a NestJS-based RESTful API with Swagger documentation. It offers user registration with country validation and secure password hashing. Registered users can authenticate to obtain JWT tokens, which are used in a JWT guard to protect routes. MongoDB is used for database storage.
 
-- Tags: Nodejs Mongodb Typscript Nestjs JWT
-- This project for try to using mongodb with typegoose
-- Using Jwt for login user.
+### Technologies:
+- NestJS
+- MongoDB, Mongoose
+- JWT
+- Swagger
+- DTOs
